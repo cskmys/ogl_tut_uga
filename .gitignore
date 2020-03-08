@@ -18,3 +18,5 @@ OpenGL-tutorial_v*
 .idea/modules.xml
 .idea/ogl.iml
 .idea/vcs.xml
+/tutorial01_first_window/tutorial01_first_window
+/tutorial02_red_triangle/tutorial02_red_triangle

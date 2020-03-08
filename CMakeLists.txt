@@ -72,9 +72,9 @@ add_executable(tutorial02_red_triangle
 	tutorial02_red_triangle/tutorial02.cpp
 	common/shader.cpp
 	common/shader.hpp
-	
-	tutorial02_red_triangle/SimpleFragmentShader.fragmentshader
-	tutorial02_red_triangle/SimpleVertexShader.vertexshader
+
+        tutorial02_red_triangle/SimpleFragmentShader.frag
+		tutorial02_red_triangle/SimpleVertexShader.vert
 )
 target_link_libraries(tutorial02_red_triangle
 	${ALL_LIBS}
