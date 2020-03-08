@@ -11,3 +11,10 @@ Thumbs.db
 OpenGL-tutorial_v*
 **.mtl
 .DS_Store
+/cmake-build-debug/
+.idea/.gitignore
+.idea/.name
+.idea/misc.xml
+.idea/modules.xml
+.idea/ogl.iml
+.idea/vcs.xml
