@@ -70,18 +70,22 @@ Max number of attributes is defined by GL_MAX_VERTEX_ATTRIBS value
 ====
 * Steps
 ** Create buffer and pass data to it
-*** buffer for vertices position created using *glGenBuffers*
-*** *glBindBuffer* is used to describe above buffer as array buffer
-*** co-ord positions data passed to buffer using *glBufferData*
-** Link buffer to an attribute of vertex for use by shader
-*** Attribute __n__ of vertices is enabled using *glEnableVertexAttribArray*
-*** buffer created above linked to Attribute 0 using *glBindBuffer*
-*** *glVertexAttribPointer* is used to describe the data in buffer
-*** in vert shader the Attribute __n__ containing co-ord positions is received as input using *in* as variable of
-the data type appropriate to the one that fits the description in glVertexAttribPointer(in this case *vec3*) with the
-attribute position using *location=__n__* for nth attribute
-** Using the value received
-*** normally value received is used by itself or with built-in variables. Ex: *gl_Position* in this case.
+*** buffer for vertices position created: *glGenBuffers*
+*** describe above buffer as array buffer: *glBindBuffer*
+*** co-ord positions data passed to buffer: *glBufferData*
+** In while(1)
+*** Link buffer to an attribute of vertex for use by shader
+**** Attribute __n__ of vertices is enabled: *glEnableVertexAttribArray*
+**** buffer created above linked to Attribute 0: *glBindBuffer*
+**** *glVertexAttribPointer* is used to describe the data in buffer
+**** in vert shader the Attribute __n__ containing co-ord positions is received as input: *in* as variable of
+the data type appropriate to the one that fits the description in *glVertexAttribPointer*(in this case *vec3*) with the
+attribute position: *layout(location=__n__)* for nth attribute
+*** Using the value received in shader
+**** normally value received is manipulate or with built-in variables. Ex: *gl_Position* in this case.
+*** Draw the triangles(in cpp code): *glDrawArrays*
+*** Delink buffer to an attribute of vertex
+**** Disable Attribute __n__ of vertices: *glDisableVertexAttribArray*
 
 === Fragment shader
 Executed for each sample.
@@ -93,9 +97,6 @@ Colour is assigned using this shader.
 
 * Steps
 ** nothing much as of now
-
-== VAO
-* Vertex Array Object
 
 == Co-ordinate Geo
 Interpreting the axis:
@@ -223,3 +224,19 @@ Transformed vertex = MVP Matrix * Original vertex
 The MVP calculation is done on CPU but applying MVP to each and very vertex is done in GPU.
 ====
 
+== VAO
+* Vertex Array Object
+
+== Z-Buffer
+When you draw a “far” triangle and a “near” triangle, if far gets drawn first and then near:
+
+image::far_near.png[far and then near]
+
+What if near gets drawn first and then far:
+
+image::near_far.png[near and then far]
+
+The solution is to store the depth(z) component of each fragment in a buffer, and each and every time you want to
+write a fragment, you 1st check if you should (i.e the new fragment is closer than the previous one).
+
+This is done in hardware by z-buffer.
