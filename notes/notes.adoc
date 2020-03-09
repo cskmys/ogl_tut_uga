@@ -1,0 +1,77 @@
+* Sequence
+** Initialize the widow manager software: *glfwInit*
+** Set the properties: *glfwWindowHint*
+** Setup window:
+*** Create window: *glfwCreateWindow*
+*** Make it current one: *glfwMakeContextCurrent*
+*** Setup input mode of GLFW: *glfwSetInputMode*
+** Setup OpenGL: *glewInit*
++
+[WARNING]
+====
+If you call any opengl apis before this, program will crash
+====
+** Load shader programs(if you have one): *LoadShaders*(defined in common/shader.cpp)
+** __Do your thing__
+** While window is open or esc key not pressed
+*** clear the screen: *glClear*
+*** run shader programs(if you have one): *glUseProgram*
+*** __Do your thing__
+*** swap buffers: *glfwSwapBuffers*
+*** poll event: *glfwPollEvents*
+** Cleanup
+*** Delete any buffers created: *glDeleteBuffers*
+*** Delete any vertex arrays created: *glDeleteVertexArrays*
+*** Delete shader programs: *glDeleteProgram*
+** Close window and terminate GLFW: *glfwTerminate*
+* VAO: Vertex Array Object
+* Interpreting the axis:
++
+image::co-ord.png[cordinates]
+** Right hand rule
+*** x: thumb to right
+*** y: index finger to sky
+*** z: middle finger to yourself
+* 2 shaders required
+** usage
+*** 2 shader programs in separate files
+*** Programmed in GLSL(GL Shader Language)
+*** Compiled at run-time during every execution of application
+*** Shaders are not directly accessible, only an ID is return when they are created
+** Types
+*** Vertex shader:
++
+Executed for each vertex. Each vertex can have numerous attributes : A position, one or several colours,
+one or several texture coordinates, lots of other things.
++
+[NOTE]
+====
+Max number of attributes is defined by GL_MAX_VERTEX_ATTRIBS value
+====
+**** Steps
+***** Create buffer and pass data to it
+****** buffer for vertices position created using *glGenBuffers*
+****** *glBindBuffer* is used to describe above buffer as array buffer
+****** co-ord positions data passed to buffer using *glBufferData*
+***** Link buffer to an attribute of vertex for use by shader
+****** Attribute __n__ of vertices is enabled using *glEnableVertexAttribArray*
+****** buffer created above linked to Attribute 0 using *glBindBuffer*
+****** *glVertexAttribPointer* is used to describe the data in buffer
+****** in vert shader the Attribute __n__ containing co-ord positions is received as input using *in* as variable of
+the data type appropriate to the one that fits the description in glVertexAttribPointer(in this case *vec3*) with the
+attribute position using *location=__n__* for nth attribute
+***** Using the value received
+****** normally value received is used by itself or with built-in variables. Ex: *gl_Position* in this case.
+*** Fragment shader
++
+Executed for each sample.
++
+[NOTE]
+====
+Since we are using 4x anti-aliasing, we have 4 sample/pixel
+====
++
+Colour is assigned using this shader.
+
+**** Steps
+****** nothing much as of now
