@@ -47,6 +47,11 @@ int main(){
         glfwTerminate();
         return -1;
     }
+    // Enable depth test
+    glEnable(GL_DEPTH_TEST);
+    // Accept fragment if it closer to the camera than the former one
+    glDepthFunc(GL_LESS);
+
     const GLubyte* vendor = glGetString(GL_VENDOR); // Returns the vendor
     const GLubyte* renderer = glGetString(GL_RENDERER); // Returns a hint to the model
     fprintf(stdout, "%s %s\n", vendor, renderer);
