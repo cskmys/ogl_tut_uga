@@ -113,7 +113,8 @@ int main(){
     // Give our vertices to OpenGL.
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
-    GLuint Texture = loadBMP_custom("uvtemplate.bmp");
+    GLuint Texture = loadDDS("uvtemplate.DDS");
+//    GLuint Texture = loadBMP_custom("uvtemplate.bmp");
     GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");
     // Two UV coordinatesfor each vertex. They were created with Blender. You'll learn shortly how to do this yourself.
     static const GLfloat g_uv_buffer_data[] = {
@@ -169,7 +170,7 @@ int main(){
 
     // Camera matrix
     glm::mat4 View = glm::lookAt(
-            glm::vec3(4,3,-3), // Camera is at (4,3,-3), in World Space
+            glm::vec3(4,3,3), // Camera is at (4,3,3), in World Space
             glm::vec3(0,0,0), // and looks at the origin
             glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
     );
