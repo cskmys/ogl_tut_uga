@@ -240,3 +240,15 @@ The solution is to store the depth(z) component of each fragment in a buffer, an
 write a fragment, you 1st check if you should (i.e the new fragment is closer than the previous one).
 
 This is done in hardware by z-buffer.
+
+== Texture
+To texture(superimpose an image on the surface) a mesh(set of points that make up an object) you need to provide
+special set of co-ordinates call UV co-ordinates to say which part of the image that is being laid upon the triangle.
+
+image::UV_ex.png[UV co-ordinates]
+
+Observe the red lines that indicate the how the part of the image is being superimposed on the triangle using
+UV co-ordinates. Also you can see that the image is distorted to make sure that edges of image fit exactly at the
+points defined by UV co-ordinates on the points of the triangle.
+
+
